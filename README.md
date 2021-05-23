@@ -1,4 +1,4 @@
-#Car Valuation :india:
+# Car Valuation :india:
 ![GIF](static/images/car_valuation.png)
 
 #### The Car Valuation project is about predicting selling price of used cars
@@ -27,7 +27,7 @@ Link: [http://carvaluationprediction-env.eba-n8sna8rn.us-east-2.elasticbeanstalk
 ## Deployment
 #### Prepare a configuration file in main directory
 1. Create .ebextensions folder to your main directory
-2. Inside .ebextensions folder create a python.config file and write configration like [this]()
+2. Inside .ebextensions folder create a python.config file and write configration like [this](https://github.com/jaysoftic/car-valuation/blob/main/.ebextensions/python.config)
 3. Create .ebignore file inside main directory
 
 #### Here's simple steps to create an application on Elastic Bean Stalk
@@ -52,7 +52,7 @@ Link: [http://carvaluationprediction-env.eba-n8sna8rn.us-east-2.elasticbeanstalk
 
 <code><img height="30" src="https://raw.githubusercontent.com/numpy/numpy/7e7f4adab814b223f7f917369a72757cd28b10cb/branding/icons/numpylogo.svg"></code>
 <code><img height="30" src="https://matplotlib.org/_static/logo2.svg"></code>
-<code><img height="30" src="https://upload.wikimedia.org/wikipedia/commons/1/11/TensorFlowLogo.svg"></code>
+<code><img height="30" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/330px-Scikit_learn_logo_small.svg.png"></code>
 
 ## Team
 [![Jay Soni](https://avatars3.githubusercontent.com/u/49163967?s=400&u=be22bbe1409ff51991b04026f038c1373174a02a&v=4)](https://in.linkedin.com/in/jaysoftic) |
