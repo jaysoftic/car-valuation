@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container">
+
+  <br>
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Select Car:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 1%;">
+      <select name="car" id="car" onchange="vehicleView()" data-live-search="true" data-live-search-style="background-color: #232a34; color: wheat" class="selectpicker">
+        <option value="0" disabled="" selected="" >--Select--</option>
+        {% for i in car_name %}
+          <option>{{ i }}</option>
+        {% endfor %}
+      </select>
+      <p id="select-error" style="color: red;"></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 classy_frame" id="car-images-view" style="display: none; padding-top: 0%; padding-bottom: 2%;">
+      <center><h3 style="text-transform: capitalize;" id="car-heading"></h3></center>
+
+      <div id="myCarousel" class="carousel slide polaroid" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+          <li data-target="#myCarousel" data-slide-to="4"></li>
+        </ol>
+        
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" id="images-container">
+          
+        </div>
+        
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Year:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 0.5%;">
+      <input type="number" onchange=imposeMinMax(this) placeholder="Enter Year of the Model" name="year" id="year" min="1700" max="{{ current_year }}">
+      <p id="year-error" style="color: red;"></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>KM Driven:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 0.5%;">
+      <input type="number" onchange=imposeMinMax(this) placeholder="Enter Kilometer driven by the Car" name="km-driven" id="km-driven" min = "0">
+      <p id="km-error" style="color: red;"></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Fuel Type:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 1%;">
+      <select name="fuel" id="fuel" data-live-search="true" data-live-search-style="startsWith" class="btn" style="max-height: 500px;overflow-y: auto; background-color: #232a34; color: wheat">
+        <option>Diesel</option>
+        <option>Petrol</option>
+        <option>LPG</option>
+        <option>CNG</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Mileage:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 0.5%;">
+      <input type="number" onchange=imposeMinMax(this) placeholder="Enter Standard Mileage offered by the Car" name="mileage" id="mileage" min="0">
+      <p id="mileage-error" style="color: red;"></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Transmission:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 1%;">
+      <select name="transmission" id="transmission" data-live-search="true" data-live-search-style="startsWith" class="btn" style="max-height: 500px;overflow-y: auto; background-color: #232a34; color: wheat">
+        <option>Manual</option>
+        <option>Automatic</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Engine:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 0.5%;">
+      <input type="number" onchange=imposeMinMax(this) placeholder="Enter Volume of the Car Engine in CC" name="engine" id="engine" min="0">
+      <p id="engine-error" style="color: red;"></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Seller Type:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 1%;">
+      <select name="seller-type" id="seller-type" data-live-search="true" data-live-search-style="startsWith" class="btn" style="max-height: 500px;overflow-y: auto; background-color: #232a34; color: wheat">
+        <option>Individual</option>
+        <option>Dealer</option>
+        <option>Trusted Dealer</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-1" style="padding-top: 0%;">
+      <h4>Previous Owner:</h4>
+    </div>
+    <div class="col-md-10 col-sm-5" style="padding-top: 1%;">
+      <select name="owner" id="owner" data-live-search="true" data-live-search-style="startsWith" class="btn" style="max-height: 500px;overflow-y: auto; background-color: #232a34; color: wheat">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-2" style="padding-top: 0%;"></div>
+    <div class="col-md-10" style="padding-top: 1%;">
+      <button class="predict-button" onclick="onClickPrediction()">Predict Price</button>
+    </div>
+  </div>
+
+  <br><br>
+</div>
+
+<script>
+
+  function vehicleView(){
+    var carObj = document.getElementById("car");
+    var car = carObj.options[carObj.selectedIndex].value;
+    var carImagesView = document.getElementById("car-images-view");
+    var img1 = document.getElementById("img1");
+    var img2 = document.getElementById("img2");
+    var img3 = document.getElementById("img3");
+    var img4 = document.getElementById("img4");
+    var img5 = document.getElementById("img5");
+    var carHeading = document.getElementById("car-heading");
+    var imagesContainer = document.getElementById("images-container");
+    carHeading.innerHTML = car;
+
+    $.post("gettingImages", {
+      selectedCar: car
+    }, function(data, status){
+      var content = '';
+
+    content += '<div class="item active>';
+    content +=  '<img src="'+ data["currentImage"][0] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img1">';
+    content +=  '</div>';
+    content +=  '<div class="item">';
+    content +=  '  <img src="'+ data["currentImage"][1] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img2">';
+    content +=  '</div>';
+    content +=  '<div class="item">';
+    content +=  '  <img src="'+ data["currentImage"][2] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img3">';
+    content +=  '</div>';
+    content +=  '<div class="item">';
+    content +=  '  <img src="'+ data["currentImage"][3] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img4">';
+    content +=  '</div>';
+    content +=  '<div class="item">';
+    content +=  '  <img src="'+ data["currentImage"][4] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img5">';
+    content +=  '</div>';
+
+    imagesContainer.innerHTML = content;
+    })
+
+    carImagesView.style.display = "block";
+
+  }
+
+  function onClickPrediction(){
+    var carObj = document.getElementById("car");
+    var car = carObj.options[carObj.selectedIndex].value;
+    var year = document.getElementById("year").value;
+    var kmDriven = document.getElementById("km-driven").value;
+    var fuelObj = document.getElementById("fuel");
+    var fuel = fuelObj.options[fuelObj.selectedIndex].value;
+    var mileage = document.getElementById("mileage").value;
+    var transmissionObj = document.getElementById("transmission");
+    var transmission = transmissionObj.options[transmissionObj.selectedIndex].value;
+    var engine = document.getElementById("engine").value;
+    var sellerTypeObj = document.getElementById("seller-type");
+    var sellerType = sellerTypeObj.options[sellerTypeObj.selectedIndex].value;
+    var ownerObj = document.getElementById("owner");
+    var owner = ownerObj.options[ownerObj.selectedIndex].value;
+
+    var selectError = document.getElementById("select-error");
+    var yearError = document.getElementById("year-error");
+    var kmError = document.getElementById("km-error");
+    var mileageError = document.getElementById("mileage-error");
+    var engineError = document.getElementById("engine-error")
+
+    if (car == "0" || year == "" || kmDriven == "" || mileage == "" || engine == "" ){
+      if(car == "0"){
+        selectError.innerHTML = "Please select car!";
+      }else{
+        selectError.innerHTML = "";
+      }
+      if(year == ""){
+        yearError.innerHTML = "Please enter the Year of the model!";
+      }else{
+        yearError.innerHTML = "";
+      }
+      if(kmDriven == ""){
+        kmError.innerHTML = "Please enter the total KM driven by the car!";
+      }else{
+        kmError.innerHTML = "";
+      }
+      if(mileage == ""){
+        mileageError.innerHTML = "Please enter the standard mileage offered by the Car!";
+      }else{
+        mileageError.innerHTML = "";
+      }
+      if(engine == ""){
+        engineError.innerHTML = "Please enter the volume of the engine in CC!";
+      }else{
+        engineError.innerHTML = "";
+      }
+    }
+    else{
+      selectError.innerHTML = "";
+      yearError.innerHTML = "";
+      kmError.innerHTML = "";
+      mileageError.innerHTML = "";
+      engineError.innerHTML = "";
+
+      $.post("gettingPrice", {
+      car: car,
+      year: year,
+      kmDriven: kmDriven,
+      fuel: fuel,
+      mileage: mileage,
+      transmission: transmission,
+      engine: engine,
+      sellerType: sellerType,
+      owner: owner
+
+      }, function(data, status){
+        document.getElementById("resultTitle").innerHTML = car +" Price Prediction";
+        document.getElementById("resultMessage").innerHTML = data;
+        $("#resultPopup").modal("show");
+      })
+      
+    }
+    
+  }
+
+  function imposeMinMax(el){
+    if(el.value != ""){
+      if(parseInt(el.value) < parseInt(el.min)){
+        el.value = el.min;
+      }
+      if(parseInt(el.value) > parseInt(el.max)){
+        el.value = el.max;
+      }
+    }
+  }
+
+</script>
+{% endblock %}
