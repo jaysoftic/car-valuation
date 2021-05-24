@@ -17,7 +17,7 @@
 
 ## Demo
 - I have deployed this on AWS Elastic Beanstalk platform
-Link: [http://carvaluationprediction-env.eba-n8sna8rn.us-east-2.elasticbeanstalk.com/](http://carvaluationprediction-env.eba-n8sna8rn.us-east-2.elasticbeanstalk.com/)
+Link: [http://carvaluationprediction-env.eba-n8sna8rn.us-east-2.elasticbeanstalk.com/](http://carvaluationprediction-env-1.eba-pvpbk242.us-east-2.elasticbeanstalk.com/)
 
 ![GIF](readme_resources/projectDemo.gif)
 

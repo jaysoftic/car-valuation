@@ -24,31 +24,16 @@
     <div class="col-md-8 classy_frame" id="car-images-view" style="display: none; padding-top: 0%; padding-bottom: 2%;">
       <center><h3 style="text-transform: capitalize;" id="car-heading"></h3></center>
 
-      <div id="myCarousel" class="carousel slide polaroid" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-          <li data-target="#myCarousel" data-slide-to="4"></li>
-        </ol>
-        
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" id="images-container">
-          
-        </div>
-        
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span class="sr-only">Next</span>
-        </a>
+      <!-- Wrapper for slides -->
+      <div id="images-container">
+        <img class="mySlides" src="" alt="img1">
+        <img class="mySlides" src="" alt="img2">
+        <img class="mySlides" src="" alt="img3">
+        <img class="mySlides" src="" alt="img4">
+        <img class="mySlides" src="" alt="img5">
+
       </div>
+        
     </div>
     <div class="col-md-4"></div>
   </div>
@@ -162,17 +147,30 @@
 
 <script>
 
+  var myIndex = 0;
+  carousel();
+
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    var carImagesView = document.getElementById("car-images-view");
+    
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }   
+
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2500); // Change image every 2 seconds
+  }
+
   function vehicleView(){
     var carObj = document.getElementById("car");
     var car = carObj.options[carObj.selectedIndex].value;
-    var carImagesView = document.getElementById("car-images-view");
-    var img1 = document.getElementById("img1");
-    var img2 = document.getElementById("img2");
-    var img3 = document.getElementById("img3");
-    var img4 = document.getElementById("img4");
-    var img5 = document.getElementById("img5");
     var carHeading = document.getElementById("car-heading");
     var imagesContainer = document.getElementById("images-container");
+    var carImagesView = document.getElementById("car-images-view");
     carHeading.innerHTML = car;
 
     $.post("gettingImages", {
@@ -180,25 +178,14 @@
     }, function(data, status){
       var content = '';
 
-    content += '<div class="item active>';
-    content +=  '<img src="'+ data["currentImage"][0] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img1">';
-    content +=  '</div>';
-    content +=  '<div class="item">';
-    content +=  '  <img src="'+ data["currentImage"][1] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img2">';
-    content +=  '</div>';
-    content +=  '<div class="item">';
-    content +=  '  <img src="'+ data["currentImage"][2] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img3">';
-    content +=  '</div>';
-    content +=  '<div class="item">';
-    content +=  '  <img src="'+ data["currentImage"][3] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img4">';
-    content +=  '</div>';
-    content +=  '<div class="item">';
-    content +=  '  <img src="'+ data["currentImage"][4] +'" alt="" style="width: 100%; height: 310px;" title = "" id="img5">';
-    content +=  '</div>';
+      content +=  '<img class="mySlides" src="'+ data["currentImage"][0] +'" alt="currentImage" style="width: 100%; height: 310px;" title = "" >';
+      content +=  '<img class="mySlides" src="'+ data["currentImage"][1] +'" alt="currentImage" style="display: none; width: 100%; height: 310px;" title = "" >';
+      content +=  '<img class="mySlides" src="'+ data["currentImage"][2] +'" alt="currentImage" style="display: none; width: 100%; height: 310px;" title = "" >';
+      content +=  '<img class="mySlides" src="'+ data["currentImage"][3] +'" alt="currentImage" style="display: none; width: 100%; height: 310px;" title = "" >';
+      content +=  '<img class="mySlides" src="'+ data["currentImage"][4] +'" alt="currentImage" style="display: none; width: 100%; height: 310px;" title = "" >';
 
-    imagesContainer.innerHTML = content;
+      imagesContainer.innerHTML = content;
     })
-
     carImagesView.style.display = "block";
 
   }
